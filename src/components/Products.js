@@ -1,11 +1,14 @@
 import React, {useContext} from 'react'
 import {ProductsContex} from '../Global/ProductsContex'
 import Banner from './Banner';
+import {CartContext} from '../Global/CartContext'
+
 
 
 const Products = () =>{
+    const {dispatch} = useContext(CartContext)
     const {products} = useContext(ProductsContex)
-    console.log(products)
+
     return(
         <div className="container">
             <Banner />
@@ -23,7 +26,7 @@ const Products = () =>{
                                     ${product.price}.00
                                 </div>
                             </div>
-                        <div className="add-to-cart">add to cart</div>
+                        <div className="add-to-cart" onClick={()=>dispatch({type:'ADD_TO_CART', id:product.id, product})}>add to cart</div>
                         {product.status === 'hot' ? <div className="hot">Hot</div>: ''}
                         {product.status === 'new' ? <div className="new">New</div>: ''}
                     </div>
